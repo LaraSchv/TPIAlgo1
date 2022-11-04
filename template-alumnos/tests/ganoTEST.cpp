@@ -19,6 +19,8 @@ using namespace std;
 // │ * │ 2 │ * │ 1 │ 0 │
 // └───┴───┴───┴───┴───┘
 
+// Primer TEST: El jugador todavia no gano asi que puede seguir jugando.
+
 tablero t = {
     { cMINA,  cMINA,  cVACIA, cVACIA, cVACIA },
     { cVACIA, cVACIA, cVACIA, cMINA,  cVACIA },
@@ -38,3 +40,5 @@ TEST(ganoTEST, todaviaNoGano){
     jugadas j = jugadasValidas;
     ASSERT_FALSE(gano(t, j));
 }
+
+// Faltan agregar Tests los siguientes test ----> TEST: Jugador Gano y TEST: Jugador perdio.

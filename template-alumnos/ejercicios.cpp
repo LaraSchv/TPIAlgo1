@@ -62,7 +62,19 @@ bool perdio(tablero& t, jugadas& j) {
 
 /******++++**************************** EJERCICIO gano ***********+++***********************/
 bool gano(tablero& t, jugadas& j) {
-    // ...
+    bool res = false;
+
+    for (int i = 0; i < j.size(); ++i) {
+        if (cantidadMinasTotales(t,j) >= 1){ // Si la cantidad de minas en jugadas es >= 1 entonces perdio por lo tanto retorna false.
+            return res;
+        }
+        else if(j.size() == cantidadDeNoMinas(t)){
+            res = true;
+        }
+        else{
+            return res;
+        }
+    }
 }
 
 /******++++**************************** EJERCICIO jugarPlus ***********+++***********************/

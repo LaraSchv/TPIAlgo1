@@ -9,24 +9,29 @@
 using namespace std;
 
 
-tablero t = {
-    { cMINA,  cMINA,  cVACIA, cVACIA, cVACIA },
-    { cVACIA, cVACIA, cVACIA, cMINA,  cVACIA },
-    { cVACIA, cMINA,  cVACIA, cVACIA, cVACIA },
-    { cVACIA, cVACIA, cVACIA, cVACIA, cVACIA },
-    { cMINA,  cVACIA, cMINA,  cVACIA, cVACIA },
+tablero t1 = {
+        { cMINA,  cMINA,  cVACIA, cVACIA, cVACIA },
+        { cVACIA, cVACIA, cVACIA, cMINA,  cVACIA },
+        { cVACIA, cMINA,  cVACIA, cVACIA, cVACIA },
+        { cVACIA, cVACIA, cVACIA, cVACIA, cVACIA },
+        { cMINA,  cVACIA, cMINA,  cVACIA, cVACIA },
 };
 
-pos pNormal = {<2,2>};
+pos p1 = {0,0};
+pos p2 = {2,2};
+pos p3 = {4,4};
 
-pos pBorde = {<0,0>};
-
-TEST(minasAdyacentesTEST, casoNormal){
-    pos p = pNormal;
-    ASSERT_EQUAL(minasAdyacentes(t,p),2);
+TEST(minasAdyacentes,bordeSuperiorIzquierdo){
+    int result = minasAdyacentes(t1, p1);
+    ASSERT_EQ(result, 1);
 }
 
-TEST(minasAdyacentesTEST, casoBorde){
-    pos p = pBorde;
-    ASSERT_EQUAL(minasAdyacentes(t,p),1);
+TEST(minasAdyacentes,medio){
+    int result = minasAdyacentes(t1, p2);
+    ASSERT_EQ(result, 2);
+}
+
+TEST(minasAdyacentes,noHayMinas){
+    int result = minasAdyacentes(t1, p3);
+    ASSERT_EQ(result, 0);
 }

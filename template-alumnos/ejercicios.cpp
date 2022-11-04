@@ -32,31 +32,32 @@ int minasAdyacentes(tablero& t, pos p) {
     return res;
 }
 
-bool coordenadaValida(tablero& t, int pi){
-    if (0 <= pi && pi < t.size()){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-bool posValida(tablero& t, pos p){
-    if (coordenadaValida(t, p.first()) && coordenadaValida(t, p.second())){
-        return true;
-    }else{
-        return false;
-    }
-}
-
 /******++++**************************** EJERCICIO plantarBanderita ***********+++***********************/
 
 void cambiarBanderita(tablero& t, jugadas& j, pos p, banderitas& b) {
-    // ...
+   if(posValida(t,p) && !perteneceAJugadas(j, p)){
+        if(!perteneceABanderitas(b, p)){
+            b.push_back(p);
+        }
+        else{
+            borrarBanderitas(b,p);
+        }
+    }
 }
 
 /******++++**************************** EJERCICIO perdio ***********+++***********************/
 bool perdio(tablero& t, jugadas& j) {
-    // ...
+    bool res = false;
+
+    // minas = true
+
+    for (int i = 0; i < j.size(); ++i) {
+        if (hayMinas(t,j[i].first)){
+            res = true;
+        }
+    }
+
+    return res;
 }
 
 /******++++**************************** EJERCICIO gano ***********+++***********************/

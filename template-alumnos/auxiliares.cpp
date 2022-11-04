@@ -73,3 +73,33 @@ bool hayMinas(tablero t,pos p){
 
     return minas;
 }
+
+// Si una posicion que pertenece a jugadas tiene una mina entonces suma +1.
+
+int cantidadMinasTotales(tablero t,jugadas j){
+    int cantidad = 0;
+
+    for (int i = 0; i < j.size(); ++i) {
+                if (t[j[i].first.first][j[i].first.second]){
+                    cantidad++;
+                }
+    }
+
+    return cantidad;
+}
+
+// Cuenta las cantidad de posiciones totales en las que no hay minas en el tablero.
+
+int cantidadDeNoMinas(tablero t){
+    int posVacias = 0;
+
+    for (int i = 0; i < t.size(); ++i) {
+        for (int j = 0; j < t.size(); ++j) {
+            if(!t[i][j]){
+                posVacias++;
+            }
+        }
+    }
+
+    return posVacias;
+}

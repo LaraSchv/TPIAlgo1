@@ -18,14 +18,17 @@ int minasAdyacentes(tablero& t, pos p) {
     int res = 0;
 
     for (int i=-1; i<=1; i++){
-        for (intj=-1; j<=1; j++){
-            int q0 = p.first()+i;
-            int q1 = p.second()+j;
-            if (posValida(t, pos(q0, q1)) && i != 0 && j != 0){
-                if (t[q0][q1]){
+        for (int j=-1; j<=1; j++){
+            int q0 = p.first+i; //
+            int q1 = p.second+j; //
+
+            if (posValida(t, pos(q0, q1) )){
+                if (q0 == p.first && q1 == p.second){
+                    res;
+                }else if (t[q0][q1]){
                     res++;
                 }
-            } 
+            }
         }
     }
 

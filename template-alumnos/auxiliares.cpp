@@ -5,6 +5,7 @@
 //
 
 #include <iostream>
+#include <vector>
 
 #include "definiciones.h"
 #include "ejercicios.h"
@@ -28,7 +29,27 @@ bool coordenadaValida(tablero& t, int pi){
     }
 }
 
-bool perteneceAJugadas(jugadas j,pos p){
+vector<pos> devolverPosAdyacentes(tablero& t, pos p){
+    vector<pos> posAdyacentes;
+
+    for (int i=-1; i<=1; i++){
+        for (int j=-1; j<=1; j++){
+            int q0 = p.first+i; //
+            int q1 = p.second+j; //
+
+            if (posValida(t, pos(q0, q1) )){
+                if (! (q0 == p.first && q1 == p.second))
+                {
+                    posAdyacentes.push_back(pos(q0, q1));
+                }
+            }
+        }
+    }
+
+    return posAdyacentes;
+}
+
+bool perteneceAJugadas(jugadas& j,pos p){
     bool pertenece = false;
 
     for (int i = 0; i < j.size(); ++i) {
@@ -39,7 +60,7 @@ bool perteneceAJugadas(jugadas j,pos p){
     return pertenece;
 }
 
-bool perteneceABanderitas(banderitas b,pos p){
+bool perteneceABanderitas(banderitas& b,pos p){
     bool pertenece = false;
 
     for (int i = 0; i < b.size(); ++i) {
@@ -58,7 +79,7 @@ banderitas borrarBanderitas(banderitas& b,pos p){
     return b;
 }
 
-bool hayMinas(tablero t,pos p){
+bool hayMinas(tablero& t,pos p){
     bool minas = false;
 
     for (int i = 0; i < t.size(); ++i) {
@@ -76,13 +97,13 @@ bool hayMinas(tablero t,pos p){
 
 // Si una posicion que pertenece a jugadas tiene una mina entonces suma +1.
 
-int cantidadMinasTotales(tablero t,jugadas j){
+int cantidadMinasTotales(tablero& t,jugadas& j){
     int cantidad = 0;
 
     for (int i = 0; i < j.size(); ++i) {
-                if (t[j[i].first.first][j[i].first.second]){
-                    cantidad++;
-                }
+        if (t[j[i].first.first][j[i].first.second]){
+            cantidad++;
+        }
     }
 
     return cantidad;
@@ -90,7 +111,7 @@ int cantidadMinasTotales(tablero t,jugadas j){
 
 // Cuenta las cantidad de posiciones totales en las que no hay minas en el tablero.
 
-int cantidadDeNoMinas(tablero t){
+int cantidadDeNoMinas(tablero& t){
     int posVacias = 0;
 
     for (int i = 0; i < t.size(); ++i) {
@@ -103,3 +124,5 @@ int cantidadDeNoMinas(tablero t){
 
     return posVacias;
 }
+
+//vector<pos> fila121(){}

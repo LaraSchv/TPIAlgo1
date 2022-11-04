@@ -16,19 +16,11 @@ using namespace std;
 
 int minasAdyacentes(tablero& t, pos p) {
     int res = 0;
+    vector<pos> posAdyacentes = devolverPosAdyacentes(t, p);
 
-    for (int i=-1; i<=1; i++){
-        for (int j=-1; j<=1; j++){
-            int q0 = p.first+i; //
-            int q1 = p.second+j; //
-
-            if (posValida(t, pos(q0, q1) )){
-                if (q0 == p.first && q1 == p.second){
-                    res;
-                }else if (t[q0][q1]){
-                    res++;
-                }
-            }
+    for (int i=0; i<posAdyacentes.size(); i++){
+        if (t[posAdyacentes[i].first][posAdyacentes[i].second]){
+            res++;
         }
     }
 
@@ -38,7 +30,7 @@ int minasAdyacentes(tablero& t, pos p) {
 /******++++**************************** EJERCICIO plantarBanderita ***********+++***********************/
 
 void cambiarBanderita(tablero& t, jugadas& j, pos p, banderitas& b) {
-   if(posValida(t,p) && !perteneceAJugadas(j, p)){
+    if(posValida(t,p) && !perteneceAJugadas(j, p)){
         if(!perteneceABanderitas(b, p)){
             b.push_back(p);
         }
@@ -51,8 +43,6 @@ void cambiarBanderita(tablero& t, jugadas& j, pos p, banderitas& b) {
 /******++++**************************** EJERCICIO perdio ***********+++***********************/
 bool perdio(tablero& t, jugadas& j) {
     bool res = false;
-
-    // minas = true
 
     for (int i = 0; i < j.size(); ++i) {
         if (hayMinas(t,j[i].first)){
@@ -69,23 +59,40 @@ bool gano(tablero& t, jugadas& j) {
 
     for (int i = 0; i < j.size(); ++i) {
         if (cantidadMinasTotales(t,j) >= 1){ // Si la cantidad de minas en jugadas es >= 1 entonces perdio por lo tanto retorna false.
-            return res;
+            break;
         }
         else if(j.size() == cantidadDeNoMinas(t)){
             res = true;
         }
         else{
-            return res;
+            break;
         }
     }
+
+    return res;
 }
 
 /******++++**************************** EJERCICIO jugarPlus ***********+++***********************/
 void jugarPlus(tablero& t, banderitas& b, pos p, jugadas& j) {
-    // ...
+
+    jugada pJugada = {p, minasAdyacentes(t, p)};
+    j.push_back(pJugada);
+
+    if (not t[p.first][p.second]) {
+        vector<pos> posicionesAdyacentes = devolverPosAdyacentes(t,p);
+        for (int i=0; i<posicionesAdyacentes.size(); i++){
+            pos q = posicionesAdyacentes[i];
+            if (not perteneceAJugadas(j, q) && not perteneceABanderitas(b, q) && not t[q.first][q.second]){
+                jugarPlus(t, b, q, j);
+            }
+        }
+    }
+
 }
 
 /******++++**************************** EJERCICIO sugerirAutomatico121 ***********+++***********************/
 bool sugerirAutomatico121(tablero& t, banderitas& b, jugadas& j, pos& p) {
     // ...
+    p = pos(0,1);
+    return true;
 }

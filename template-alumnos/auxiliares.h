@@ -15,4 +15,5 @@ bool perteneceAJugadas(jugadas j,pos p);
 bool perteneceABanderitas(banderitas b,pos p);
 banderitas borrarBanderitas(banderitas& b,pos p);
 bool hayMinas(tablero t,pos p);
-
+int cantidadMinasTotales(tablero t,jugadas j);
+int cantidadDeNoMinas(tablero t);

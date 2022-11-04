@@ -11,9 +11,10 @@
 
 bool posValida(tablero& t, pos p);
 bool coordenadaValida(tablero& t, int pi);
-bool perteneceAJugadas(jugadas j,pos p);
-bool perteneceABanderitas(banderitas b,pos p);
+vector<pos> devolverPosAdyacentes(tablero& t, pos p);
+bool perteneceAJugadas(jugadas& j,pos p);
+bool perteneceABanderitas(banderitas& b,pos p);
 banderitas borrarBanderitas(banderitas& b,pos p);
-bool hayMinas(tablero t,pos p);
-int cantidadMinasTotales(tablero t,jugadas j);
-int cantidadDeNoMinas(tablero t);
+bool hayMinas(tablero& t,pos p);
+int cantidadMinasTotales(tablero& t,jugadas& j);
+int cantidadDeNoMinas(tablero& t);

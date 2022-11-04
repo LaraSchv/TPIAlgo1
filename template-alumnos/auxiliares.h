@@ -9,3 +9,10 @@
 
 #include "definiciones.h"
 
+bool posValida(tablero& t, pos p);
+bool coordenadaValida(tablero& t, int pi);
+bool perteneceAJugadas(jugadas j,pos p);
+bool perteneceABanderitas(banderitas b,pos p);
+banderitas borrarBanderitas(banderitas& b,pos p);
+bool hayMinas(tablero t,pos p);
+

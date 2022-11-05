@@ -18,3 +18,5 @@ banderitas borrarBanderitas(banderitas& b,pos p);
 bool hayMinas(tablero& t,pos p);
 int cantidadMinasTotales(tablero& t,jugadas& j);
 int cantidadDeNoMinas(tablero& t);
+bool existeJugada121(tablero t);
+vector<pos> jugadas121(tablero t,jugadas j);

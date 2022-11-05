@@ -125,4 +125,46 @@ int cantidadDeNoMinas(tablero& t){
     return posVacias;
 }
 
-//vector<pos> fila121(){}
+bool existeJugada121(tablero t){
+    int existe121 = false;
+
+    for (int i = 0; i < t.size(); ++i) {
+        for (int j = 0; j < t.size(); ++j){
+            if ((minasAdyacentes(t,{i,j})) == 2 && (minasAdyacentes(t,{i+1,j})) == 1 && (minasAdyacentes(t,{i-1,j})) == 1 || (minasAdyacentes(t,{i,j})) == 2 && (minasAdyacentes(t,{i,j-1})) == 1 && (minasAdyacentes(t,{i,j+1})) == 1){
+                existe121 = true;
+            }
+        }
+    }
+
+    return existe121;
+}
+
+vector<pos> jugadas121(tablero t,jugadas j){
+    vector<pos> jugada121;
+
+
+    for (int i = 0; i < j.size(); ++i) {
+        if (j[i].second == 2){
+            // Vertical
+            if (perteneceAJugadas(j,{j[i].first.first-1,j[i].first.second}) && perteneceAJugadas(j,{j[i].first.first+1,j[i].first.second})){
+                if (minasAdyacentes(t,{j[i].first.first-1,j[i].first.second}) == 1 && minasAdyacentes(t,{j[i].first.first+1,j[i].first.second}) == 1){
+                    jugada121.push_back({j[i].first.first-1,j[i].first.second});
+                    jugada121.push_back({j[i].first.first,j[i].first.second});
+                    jugada121.push_back({j[i].first.first+1,j[i].first.second});
+                    jugada121.push_back({1,0});
+                } //
+            }
+            // Horizontal
+            else if (perteneceAJugadas(j,{j[i].first.first,j[i].first.second-1}) && perteneceAJugadas(j,{j[i].first.first,j[i].first.second+1})){
+                if (minasAdyacentes(t,{j[i].first.first,j[i].first.second-1}) == 1 && minasAdyacentes(t,{j[i].first.first,j[i].first.second+1}) == 1){
+                    jugada121.push_back({j[i].first.first,j[i].first.second-1});
+                    jugada121.push_back({j[i].first.first,j[i].first.second});
+                    jugada121.push_back({j[i].first.first,j[i].first.second+1});
+                    jugada121.push_back({0,1});
+                }
+            }
+        }
+    }
+
+    return jugada121;
+}

@@ -92,7 +92,61 @@ void jugarPlus(tablero& t, banderitas& b, pos p, jugadas& j) {
 
 /******++++**************************** EJERCICIO sugerirAutomatico121 ***********+++***********************/
 bool sugerirAutomatico121(tablero& t, banderitas& b, jugadas& j, pos& p) {
-    // ...
-    p = pos(0,1);
+  vector<pos> jugada121Valida;
+    pos posicionRecomendada;
+
+    if(existeJugada121(t)){
+        jugada121Valida = jugadas121(t,j);
+        if (jugada121Valida[4].first == 1){ // j+1 y j-1
+            if(posValida(t,{jugada121Valida[1].first,jugada121Valida[1].second-1})){
+                if (!perteneceAJugadas(j,{jugada121Valida[1].first,jugada121Valida[1].second-1})){
+                    if (!perteneceABanderitas(b,{jugada121Valida[1].first,jugada121Valida[1].second-1})){
+                        if (!hayMinas(t,{jugada121Valida[1].first,jugada121Valida[1].second-1})){
+                            posicionRecomendada = {jugada121Valida[1].first,jugada121Valida[1].second-1};
+                        }
+                        else{
+                            posicionRecomendada = {jugada121Valida[1].first,jugada121Valida[1].second+1};
+                        }
+                    }
+                    else{
+                        posicionRecomendada = {jugada121Valida[1].first,jugada121Valida[1].second+1};
+                    }
+                }
+                else{
+                    posicionRecomendada = {jugada121Valida[1].first,jugada121Valida[1].second+1};
+                }
+            }
+            else{
+                posicionRecomendada = {jugada121Valida[1].first,jugada121Valida[1].second+1};
+            }
+        }
+        else if (jugada121Valida[4].first == 2){
+            if(posValida(t,{jugada121Valida[1].first-1,jugada121Valida[1].second})){
+                if (!perteneceAJugadas(j,{jugada121Valida[1].first-1,jugada121Valida[1].second})){
+                    if (!perteneceABanderitas(b,{jugada121Valida[1].first-1,jugada121Valida[1].second})){
+                        if (!hayMinas(t,{jugada121Valida[1].first-1,jugada121Valida[1].second})){
+                            posicionRecomendada = {jugada121Valida[1].first-1,jugada121Valida[1].second};
+                        }
+                        else{
+                            posicionRecomendada = {jugada121Valida[1].first+1,jugada121Valida[1].second};
+                        }
+                    }
+                    else{
+                        posicionRecomendada = {jugada121Valida[1].first+1,jugada121Valida[1].second};
+                    }
+                }
+                else{
+                    posicionRecomendada = {jugada121Valida[1].first+1,jugada121Valida[1].second};
+                }
+            }
+            else{
+                posicionRecomendada = {jugada121Valida[1].first+1,jugada121Valida[1].second};
+            }
+        }
+    }
+    else{
+        return false;
+    }
+
     return true;
 }
